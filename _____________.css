@@ -1,0 +1,10 @@
+.Loading:before { 
+  content: "";
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  background-color: #ff4500;
+  opacity: .75;
+  border-radius: 100%;
+  animation: scaleout 1.5s infinite ease-in-out;
+}
