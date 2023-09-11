@@ -10,8 +10,6 @@ export const LoadingContainer = styled.SafeAreaView`
 export const RedditIconContainer = styled.View`
   width:  48px;
   height: 48px;
-
-  /* FAZER ISSO PULSAR */
 `;
 
 export const RedditIcon = styled(RawRedditIcon)`
