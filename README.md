@@ -14,6 +14,7 @@
 
 ## *To-do list*
 
+- [ ] Remover `styled-components`
 - [ ] Descobrir como usar duas animações de uma vez
 
 ## Motivação
