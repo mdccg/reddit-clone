@@ -22,7 +22,7 @@ const PulsatingCircle: React.FC<PulsatingCircleProps> = ({
       </View>
 
       <Animatable.View
-        animation="bounceIn"
+        animation="zoomIn"
         iterationCount="infinite"
         duration={duration}
         style={styles.circleContainer}>

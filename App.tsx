@@ -1,16 +1,19 @@
+import { ThemeProvider as RestyleProvider } from '@shopify/restyle';
 import { StatusBar } from 'expo-status-bar';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider as StyledComponentsProvider } from 'styled-components';
 import LoadingScreen from './src/screens/Loading';
-import Theme from './src/stylesheets/theme';
+import theme from './src/stylesheets/theme';
 
 const App = () => {
   return (
     <>
       <StatusBar style="auto" />
       
-      <ThemeProvider theme={Theme}>
-        <LoadingScreen />
-      </ThemeProvider>
+      <RestyleProvider theme={theme}>
+        <StyledComponentsProvider theme={theme}>
+          <LoadingScreen />
+        </StyledComponentsProvider>
+      </RestyleProvider>
     </>
   );
 }
