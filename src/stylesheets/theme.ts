@@ -7,6 +7,8 @@ const theme = createTheme({
     mainForeground: palette.whiteLight,
     cardPrimaryBackground: palette.orangePrimary,
     buttonPrimaryBackground: palette.bluePrimary,
+    iconPrimaryBackground: palette.blackPrimary,
+    onlinePrimaryBackground: palette.greenPrimary,
   },
 
   spacing: {
@@ -17,8 +19,11 @@ const theme = createTheme({
   },
 
   textVariants: {
+    bold: {
+      fontFamily: 'Verdana_700Bold',
+    },
+
     header: {
-      fontFamily: 'Lato_700Bold',
       fontSize: 34,
     },
     body: {
@@ -26,7 +31,8 @@ const theme = createTheme({
       lineHeight: 24,
     },
     defaults: {
-      // We can define a default text variant here.
+      fontFamily: 'Verdana_400Regular',
+      color: 'iconPrimaryBackground',
     },
   },
 });

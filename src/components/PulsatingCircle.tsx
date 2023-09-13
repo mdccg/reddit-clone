@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import * as Animatable from 'react-native-animatable';
+import Box from './Box';
 
 interface PulsatingCircleProps {
   children: JSX.Element;
@@ -11,9 +12,9 @@ interface PulsatingCircleProps {
 
 const PulsatingCircle: React.FC<PulsatingCircleProps> = ({ children, duration, color, size }) => (
   <>
-    <View style={styles.portal}>
+    <Box position="absolute" elevation={1} zIndex={2}>
       {children}
-    </View>
+    </Box>
 
     <Animatable.View
       duration={duration}
@@ -39,12 +40,6 @@ const PulsatingCircle: React.FC<PulsatingCircleProps> = ({ children, duration, c
 );
 
 const styles = StyleSheet.create({
-  portal: {
-    position: 'absolute',
-    elevation: 1,
-    zIndex: 2,
-  },
-  
   circleContainer: {
     justifyContent: 'center',
     alignItems: 'center',

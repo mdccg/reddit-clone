@@ -14,7 +14,10 @@
 
 ## *To-do list*
 
-- [ ] Remover `styled-components`
+- [X] Remover `styled-components`
+- [ ] Aplicar tema escuro na tela de carregamento
+- [ ] Adicionar o _dropdown_ da tela inicial
+- [ ] Adicionar as outras pilhas de navegação
 - [ ] Descobrir como usar duas animações de uma vez
 
 ## Motivação

@@ -5,8 +5,9 @@ const darkTheme: Theme = {
   ...theme,
   colors: {
     ...theme.colors,
-    mainBackground: palette.blackPrimary,
-    mainForeground: palette.blackLight,
+    mainBackground: palette.blackLight,
+    mainForeground: palette.blackPrimary,
+    iconPrimaryBackground: palette.whitePrimary,
   },
 };
 

@@ -1,9 +1,9 @@
-import Text from '../components/Text';
+import Header from '../components/Header';
 
 const Feed = () => {
   return (
     <>
-      <Text>Isso vai ser osso...</Text>
+      <Header />
     </>
   );
 }

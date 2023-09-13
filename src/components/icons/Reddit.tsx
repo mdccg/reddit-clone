@@ -10,4 +10,5 @@ const RedditIcon = (props: SvgProps) => (
     />
   </Svg>
 );
+
 export default RedditIcon;
