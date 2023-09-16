@@ -2,7 +2,7 @@ import { useTheme } from '@shopify/restyle';
 import { useContext, useState } from 'react';
 import { Dimensions, Image, Pressable, StyleSheet, TouchableOpacity } from 'react-native';
 import * as Animatable from 'react-native-animatable';
-import Mdccg from '../../assets/images/mdccg.png';
+import UserMdccg from '../../assets/images/u-mdccg.png';
 import { Theme } from '../stylesheets/theme';
 import Box from './Box';
 import DropdownOption from './DropdownOption';
@@ -98,7 +98,7 @@ const Header = () => {
                 marginLeft: theme.spacing.m,
               }
             ]}>
-              <Image style={styles.avatar} source={Mdccg} />
+              <Image style={styles.avatar} source={UserMdccg} />
 
               <Box style={styles.onlineSignContainer}>
                 <Box style={[
