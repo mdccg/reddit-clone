@@ -10,13 +10,9 @@ import AppWrapper from './AppWrapper';
 
 const App = () => {
   return (
-    <>
-      <StatusBar />
-      
-      <UserContextProvider>
-        <AppWrapper />
-      </UserContextProvider>
-    </>
+    <UserContextProvider>
+      <AppWrapper />
+    </UserContextProvider>
   );
 }
 

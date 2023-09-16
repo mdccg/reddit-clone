@@ -1,12 +1,13 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { ThemeProvider } from '@shopify/restyle';
+import { useFonts } from 'expo-font';
 import { useContext, useEffect, useState } from 'react';
+import StatusBar from './src/components/StatusBar';
 import { UserContext } from './src/context/UserContext';
 import MainStackNavigator from './src/navigation/MainStackNavigator';
 import LoadingScreen from './src/screens/Loading';
-import theme from './src/stylesheets/theme';
 import darkTheme from './src/stylesheets/darkTheme';
-import { useFonts } from 'expo-font';
+import theme from './src/stylesheets/theme';
 
 const AppWrapper = () => {
   const [fontsLoaded] = useFonts({
@@ -25,8 +26,10 @@ const AppWrapper = () => {
 
   return (
     <ThemeProvider theme={isDarkThemeActivated ? darkTheme : theme}>
+      <StatusBar />
+
       <NavigationContainer>
-        {isReady ? <MainStackNavigator /> : <LoadingScreen />}
+        {(fontsLoaded && isReady) ? <MainStackNavigator /> : <LoadingScreen />}
       </NavigationContainer>
     </ThemeProvider>
   );

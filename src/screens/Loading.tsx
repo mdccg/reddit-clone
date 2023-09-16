@@ -11,7 +11,7 @@ const Loading = () => {
   const { cardPrimaryBackground } = theme.colors;
 
   return (
-    <CenteredBox>
+    <CenteredBox backgroundColor="mainForeground">
       <PulsatingCircle duration={2000} size={96} color={cardPrimaryBackground}>
         <CenteredBox width={redditIconSize} height={redditIconSize}>
           <RedditIcon width={redditIconSize} height={redditIconSize} />

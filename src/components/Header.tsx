@@ -1,10 +1,11 @@
 import { useTheme } from '@shopify/restyle';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Dimensions, Image, Pressable, StyleSheet, TouchableOpacity } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Mdccg from '../../assets/images/mdccg.png';
 import { Theme } from '../stylesheets/theme';
 import Box from './Box';
+import DropdownOption from './DropdownOption';
 import Row from './Row';
 import Text from './Text';
 import AngleDownSolidIcon from './icons/AngleDownSolid';
@@ -14,21 +15,28 @@ import HouseSolidIcon from './icons/HouseSolid';
 import MagnifyingGlassSolidIcon from './icons/MagnifyingGlassSolid';
 import SparkleSolidIcon from './icons/SparkleSolid';
 import TvSolidIcon from './icons/TvSolid';
+import { UserContext } from '../context/UserContext';
 
 const duration = 250;
 const fadeIn = { from: { opacity: 0 }, to: { opacity: .625 }};
 const fadeOut = { from: { opacity: .625 }, to: { opacity: 0 }};
+const dropdownOptions = [
+  { icon: HouseSolidIcon,   screenName: 'Início' },
+  { icon: FireSolidIcon,    screenName: 'Popular' },
+  { icon: TvSolidIcon,      screenName: 'Assista' },
+  { icon: SparkleSolidIcon, screenName: 'Mais Recentes' },
+];
 
 const Header = () => {
   const theme = useTheme<Theme>();
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
-  const [selectedOption, setSelectedOption] = useState<string>('Início');
+  const { selectedHomeScreen, setSelectedHomeScreen } = useContext(UserContext);
   const [isDropdownCollapsing, setIsDropdownCollapsing] = useState<boolean>(false);
 
   const openLeftDrawer = () => alert('A configurar menu lateral à esquerda');
 
-  const selectOption = (value: string) => {
-    setSelectedOption(value);
+  const selectOption = (value: any) => {
+    setSelectedHomeScreen(value);
     collapseDropdown();
   }
 
@@ -74,8 +82,8 @@ const Header = () => {
               ]}
               onPress={() => setIsDropdownOpen(!isDropdownOpen)}
             >
-              <Text variant="bold" marginRight="s">{selectedOption}</Text>
-              <AngleDownSolidIcon width={12} height={12} fill={theme.colors.iconPrimaryBackground} transform={isDropdownOpen ? [{ rotate: '180deg' }] : undefined} />
+              <Text variant="bold" marginRight="s">{selectedHomeScreen}</Text>
+              <AngleDownSolidIcon width={12} height={12} fill={theme.colors.iconPrimaryBackground} transform={(isDropdownOpen && !isDropdownCollapsing) ? [{ rotate: '180deg' }] : undefined} />
             </TouchableOpacity>
           </Row>
 
@@ -113,32 +121,20 @@ const Header = () => {
             }
           ]}
             animation={isDropdownCollapsing ? 'fadeOutUp' : 'fadeInDown'}
-            duration={duration}>
-            <TouchableOpacity onPress={() => selectOption('Início')} style={[styles.optionContainer, {
-              marginBottom: theme.spacing.l,
-            }]}>
-              <HouseSolidIcon {...styles.iconStyles} fill={theme.colors.iconPrimaryBackground} />
-              <Text variant="bold" marginLeft="m">Início</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => selectOption('Popular')} style={[styles.optionContainer, {
-              marginBottom: theme.spacing.l,
-            }]}>
-              <FireSolidIcon {...styles.iconStyles} fill={theme.colors.iconPrimaryBackground} />
-              <Text variant="bold" marginLeft="m">Popular</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => selectOption('Assista')} style={[styles.optionContainer, {
-              marginBottom: theme.spacing.l,
-            }]}>
-              <TvSolidIcon {...styles.iconStyles} fill={theme.colors.iconPrimaryBackground} />
-              <Text variant="bold" marginLeft="m">Assista</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => selectOption('Mais Recentes')} style={styles.optionContainer}>
-              <SparkleSolidIcon {...styles.iconStyles} fill={theme.colors.iconPrimaryBackground} />
-              <Text variant="bold" marginLeft="m">Mais Recentes</Text>
-            </TouchableOpacity>
+            duration={duration}
+          >
+            {dropdownOptions.map((dropdownOption, index, array) => {
+              const isLastOne = array.length - 1 === index;
+            
+              return (
+                <DropdownOption
+                  key={dropdownOption.screenName}
+                  selectOption={selectOption}
+                  {...dropdownOption}
+                  style={isLastOne ? { marginBottom: 0 } : {}}
+                  />
+              );
+            })}
           </Animatable.View>
         )}
 
@@ -170,11 +166,6 @@ const styles = StyleSheet.create({
     zIndex: 2,
   },
 
-  optionContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-
   wrapper: {
     backgroundColor: 'black',
     opacity: .625,
@@ -183,12 +174,6 @@ const styles = StyleSheet.create({
     height: Dimensions.get('screen').height,
     elevation: 1,
     zIndex: 1,
-  },
-
-  iconStyles: {
-    width:  24,
-    height: 24,
-    fill: 'red',
   },
 
   selectContainer: {
