@@ -2,21 +2,27 @@ import { useTheme } from '@shopify/restyle';
 import { DateTime } from 'luxon';
 import { useEffect, useState } from 'react';
 import { Image, Linking, StyleSheet, TouchableOpacity } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import { Theme } from '../stylesheets/theme';
 import PostType from '../types/PostType';
 import Box from './Box';
 import Row from './Row';
 import Text from './Text';
-import EllipsisVerticalSolidIcon from './icons/EllipsisVerticalSolid';
-import UpvoteRegularIcon from './icons/UpvoteRegular';
 import CommentDotsRegularIcon from './icons/CommentDotsRegular';
+import EllipsisVerticalSolidIcon from './icons/EllipsisVerticalSolid';
 import ShareSolidIcon from './icons/ShareSolid';
+import UpvoteRegularIcon from './icons/UpvoteRegular';
 import UpvoteSolidIcon from './icons/UpvoteSolid';
+import { formatVotes } from '../utils/validate_utils';
 
 interface PostCardProps {
   post: PostType;
   isUserSubscribed: boolean;
 }
+
+const duration = 500;
+const downAnimation = 'slideInUp';
+const upAnimation = 'slideInDown';
 
 const PostCard: React.FC<PostCardProps> = ({
   post: {
@@ -36,8 +42,11 @@ const PostCard: React.FC<PostCardProps> = ({
   const theme = useTheme<Theme>();
   const [relative, setRelative] = useState<string | undefined>();
   const [votesCount, setVotesCount] = useState<number>(initialVotesCount);
+  const [lastVoteCount, setLastVoteCount] = useState<number>(initialVotesCount);
   const [isUpvoted, setIsUpvoted] = useState<boolean>(false);
   const [isDownvoted, setIsDownvoted] = useState<boolean>(false);
+  const [currentVoteAnimation, setCurrentVoteAnimation] = useState<typeof downAnimation | typeof upAnimation | undefined>();
+  const [lastVoteAnimation, setLastVoteAnimation] = useState<string | undefined>();
 
   const UpvoteIcon = isUpvoted ? UpvoteSolidIcon : UpvoteRegularIcon;
   const DownvoteIcon = isDownvoted ? UpvoteSolidIcon : UpvoteRegularIcon;
@@ -47,17 +56,23 @@ const PostCard: React.FC<PostCardProps> = ({
 
     if (isUpvoted) {
       --newVotesCount;
+      setLastVoteCount(newVotesCount + 1);
+      setCurrentVoteAnimation(downAnimation);
       setIsUpvoted(false);
       setVotesCount(newVotesCount);
     } else {
       if (isDownvoted) {
         ++newVotesCount;
+        setLastVoteCount(newVotesCount - 1);
+        setCurrentVoteAnimation(upAnimation);
         setIsDownvoted(false);
       }
       
       ++newVotesCount;
+      setCurrentVoteAnimation(upAnimation);
       setIsUpvoted(true);
       setVotesCount(newVotesCount);
+      setLastVoteCount(newVotesCount - 1);
     }
   }
 
@@ -66,17 +81,23 @@ const PostCard: React.FC<PostCardProps> = ({
 
     if (isDownvoted) {
       ++newVotesCount;
+      setCurrentVoteAnimation(upAnimation);
       setIsDownvoted(false);
       setVotesCount(newVotesCount);
+      setLastVoteCount(newVotesCount - 1);
     } else {
       if (isUpvoted) {
         --newVotesCount;
+        setLastVoteCount(newVotesCount + 1);
+        setCurrentVoteAnimation(downAnimation);
         setIsUpvoted(false);
       }
       
       --newVotesCount;
+      setCurrentVoteAnimation(downAnimation);
       setIsDownvoted(true);
       setVotesCount(newVotesCount);
+      setLastVoteCount(newVotesCount + 1);
     }
   }
 
@@ -94,6 +115,15 @@ const PostCard: React.FC<PostCardProps> = ({
 
     getRelative();
   }, []);
+
+  useEffect(() => {
+    setCurrentVoteAnimation(undefined);
+    setLastVoteAnimation(undefined);
+  }, [theme]);
+
+  useEffect(() => {
+    if (currentVoteAnimation) setLastVoteAnimation(currentVoteAnimation === 'slideInDown' ? 'fadeOutDown' : 'fadeOutUp');
+  }, [currentVoteAnimation]);
 
   return (
     <Box
@@ -125,13 +155,14 @@ const PostCard: React.FC<PostCardProps> = ({
         variant="bold"
         fontSize={16}
       >
-          {content}
+        {content}
       </Text>
 
       {image && (
         <Box style={[styles.imageFrame, {
           margin: theme.spacing.m,
           marginTop: theme.spacing.s,
+          marginBottom: theme.spacing.s,
         }]}>
           <Image source={image} style={styles.image} resizeMode="contain" />
         </Box>
@@ -159,15 +190,40 @@ const PostCard: React.FC<PostCardProps> = ({
             <UpvoteIcon {...styles.voteIcon} fill={isUpvoted ? theme.colors.cardPrimaryBackground : theme.colors.iconPrimaryBackground} />
           </TouchableOpacity>
 
-          <Box style={styles.countTextContainer}>
-            <Text style={[styles.countText,
-              isUpvoted ? {
-                color: theme.colors.cardPrimaryBackground,
-              } : (
-              isDownvoted ? {
-                color: theme.colors.buttonPrimaryBackground,
-              } : {}
-            )]}>{votesCount}</Text>
+          <Box>
+            <Animatable.View
+              key={`${currentVoteAnimation}-${new Date().getMilliseconds()}`}
+              animation={currentVoteAnimation}
+              duration={duration}
+            >
+              <Box style={styles.countTextContainer}>
+                <Text style={[styles.countText,
+                  isUpvoted ? {
+                    color: theme.colors.cardPrimaryBackground,
+                  } : (
+                  isDownvoted ? {
+                    color: theme.colors.buttonPrimaryBackground,
+                  } : {}
+                )]}>{formatVotes(votesCount)}</Text>
+              </Box>
+            </Animatable.View>
+
+            <Animatable.View
+              animation={lastVoteAnimation}
+              duration={duration}
+              style={[styles.lastValue, !lastVoteAnimation ? { opacity: 0 } : {}]}
+            >
+              <Box style={styles.countTextContainer}>
+                <Text style={[styles.countText,
+                  isUpvoted ? {
+                    color: theme.colors.cardPrimaryBackground,
+                  } : (
+                  isDownvoted ? {
+                    color: theme.colors.buttonPrimaryBackground,
+                  } : {}
+                )]}>{formatVotes(lastVoteCount)}</Text>
+              </Box>
+            </Animatable.View>
           </Box>
 
           <TouchableOpacity onPress={downvote} style={styles.iconContainer}>
@@ -204,6 +260,10 @@ const PostCard: React.FC<PostCardProps> = ({
 }
 
 const styles = StyleSheet.create({
+  lastValue: {
+    position: 'absolute',
+  },
+
   subredditPicture: {
     width:  24,
     height: 24,
@@ -257,7 +317,7 @@ const styles = StyleSheet.create({
 
   countTextContainer: {
     alignItems: 'center',
-    minWidth: 16,
+    minWidth: 24,
   },
 
   countText: {

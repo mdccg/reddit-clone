@@ -18,6 +18,7 @@
 - [X] Aplicar tema escuro na tela de carregamento
 - [X] Adicionar o _dropdown_ da tela inicial
 - [X] Criar o componente `Post`
+- [X] Adicionar animação nos números
 - [ ] Adicionar as outras pilhas de navegação
 - [ ] Corrigir o bug das animações assíncronas na tela de carregamento
 

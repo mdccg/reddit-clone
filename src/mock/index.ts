@@ -6,7 +6,7 @@ export const postsMock: PostType[] = [
     subredditName: 'Minecraft',
     content: 'What is the best (and worst) looking armour trim?',
     image: require('../../assets/images/p-16k7lja.jpg'),
-    votesCount: 312,
+    votesCount: 999,
     commentsCount: 49,
     sharesCount: 0,
     creationDate: new Date('2023-09-16T13:27:58-04:00')
@@ -16,7 +16,7 @@ export const postsMock: PostType[] = [
     subredditName: 'cellbits',
     content: 'KKKKKKKKKKKKK',
     image: require('../../assets/images/p-16kgls3.jpg'),
-    votesCount: -1,
+    votesCount: -2,
     commentsCount: 4,
     sharesCount: 3,
     creationDate: new Date('2023-09-16T20:03:18-04:00')

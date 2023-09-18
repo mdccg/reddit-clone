@@ -18,8 +18,8 @@ import TvSolidIcon from './icons/TvSolid';
 import AvatarOMine from './AvatarOMine';
 
 const duration = 250;
-const fadeIn = { from: { opacity: 0 }, to: { opacity: .625 }};
-const fadeOut = { from: { opacity: .625 }, to: { opacity: 0 }};
+const customFadeIn = { from: { opacity: 0 }, to: { opacity: .625 }};
+const customFadeOut = { from: { opacity: .625 }, to: { opacity: 0 }};
 const dropdownOptions = [
   { icon: HouseSolidIcon,   screenName: 'Início' },
   { icon: FireSolidIcon,    screenName: 'Popular' },
@@ -30,11 +30,13 @@ const dropdownOptions = [
 const Header = () => {
   const theme = useTheme<Theme>();
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
-  const { selectedHomeScreen, setSelectedHomeScreen } = useContext(UserContext);
+  const { selectedHomeScreen, setSelectedHomeScreen, isDarkThemeActivated, setIsDarkThemeActivated } = useContext(UserContext);
   const [isDropdownCollapsing, setIsDropdownCollapsing] = useState<boolean>(false);
 
   const openLeftDrawer = () => alert('A configurar menu lateral à esquerda.');
-  const openRightDrawer = () => alert('A configurar menu lateral à direita.');
+  const openRightDrawer = () => {
+    setIsDarkThemeActivated(!isDarkThemeActivated);
+  }
 
   const selectOption = (value: any) => {
     setSelectedHomeScreen(value);
@@ -125,7 +127,7 @@ const Header = () => {
 
         {isDropdownOpen && (
           <Animatable.View
-            animation={isDropdownCollapsing ? fadeOut : fadeIn}
+            animation={isDropdownCollapsing ? customFadeOut : customFadeIn}
             duration={duration}
             style={styles.wrapper}
           >

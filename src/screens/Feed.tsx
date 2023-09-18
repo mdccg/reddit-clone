@@ -1,12 +1,11 @@
 import { useTheme } from '@shopify/restyle';
 import { useState } from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView } from 'react-native';
 import Header from '../components/Header';
-import Text from '../components/Text';
+import PostCard from '../components/PostCard';
 import { postsMock } from '../mock';
 import { Theme } from '../stylesheets/theme';
 import PostType from '../types/PostType';
-import PostCard from '../components/PostCard';
 
 const Feed = () => {
   const theme = useTheme<Theme>();
@@ -17,7 +16,10 @@ const Feed = () => {
     <>
       <Header />
       
-      <ScrollView style={[styles.feed, { backgroundColor: theme.colors.mainForeground }]}>
+      <ScrollView 
+        style={{ backgroundColor: theme.colors.mainForeground }}
+        contentContainerStyle={{ paddingBottom: theme.spacing.m }}
+      >
         {posts.map((post, index) => (
           <PostCard
             key={index}
@@ -28,9 +30,5 @@ const Feed = () => {
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  feed: {},
-});
 
 export default Feed;
