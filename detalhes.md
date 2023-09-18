@@ -7,3 +7,7 @@
 - Criar
 - Bate-papo
 - Notificações
+
+```console
+yarn add @formatjs/intl-locale @formatjs/intl-datetimeformat @formatjs/intl-datetimeformat
+```

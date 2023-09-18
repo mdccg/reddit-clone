@@ -1,7 +1,7 @@
 import React from 'react';
 
 type FatherProps = {
-  children: JSX.Element | JSX.Element[];
+  children: any;
   ref?: React.Ref<any>;
 }
 

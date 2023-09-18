@@ -15,10 +15,11 @@
 ## *To-do list*
 
 - [X] Remover `styled-components`
-- [ ] Aplicar tema escuro na tela de carregamento
-- [ ] Adicionar o _dropdown_ da tela inicial
+- [X] Aplicar tema escuro na tela de carregamento
+- [X] Adicionar o _dropdown_ da tela inicial
+- [X] Criar o componente `Post`
 - [ ] Adicionar as outras pilhas de navegação
-- [ ] Descobrir como usar duas animações de uma vez
+- [ ] Corrigir o bug das animações assíncronas na tela de carregamento
 
 ## Motivação
 

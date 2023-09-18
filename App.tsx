@@ -1,12 +1,11 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { ThemeProvider } from '@shopify/restyle';
-import { useEffect, useState } from 'react';
-import StatusBar from './src/components/StatusBar';
-import MainStackNavigator from './src/navigation/MainStackNavigator';
-import LoadingScreen from './src/screens/Loading';
-import theme from './src/stylesheets/theme';
-import { UserContextProvider } from './src/context/UserContext';
+import '@formatjs/intl-locale/polyfill';
+import '@formatjs/intl-datetimeformat/polyfill';
+import '@formatjs/intl-datetimeformat/add-all-tz';
+import '@formatjs/intl-datetimeformat/locale-data/pt';
+import { Settings } from 'luxon';
 import AppWrapper from './AppWrapper';
+import { UserContextProvider } from './src/context/UserContext';
+Settings.defaultLocale = 'pt';
 
 const App = () => {
   return (

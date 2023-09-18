@@ -6,6 +6,7 @@ type PostType = {
   image?: any;
   votesCount: number;
   commentsCount: number;
+  sharesCount?: number;
   isSponsored?: boolean;
   website?: string;
 }

@@ -9,6 +9,7 @@ const theme = createTheme({
     buttonPrimaryBackground: palette.bluePrimary,
     iconPrimaryBackground: palette.blackPrimary,
     onlinePrimaryBackground: palette.greenPrimary,
+    grayBackground: palette.grayLight,
   },
 
   spacing: {

@@ -2,7 +2,7 @@ import { useTheme } from '@shopify/restyle';
 import { useContext, useState } from 'react';
 import { Dimensions, Image, Pressable, StyleSheet, TouchableOpacity } from 'react-native';
 import * as Animatable from 'react-native-animatable';
-import UserMdccg from '../../assets/images/u-mdccg.png';
+import { UserContext } from '../context/UserContext';
 import { Theme } from '../stylesheets/theme';
 import Box from './Box';
 import DropdownOption from './DropdownOption';
@@ -15,7 +15,7 @@ import HouseSolidIcon from './icons/HouseSolid';
 import MagnifyingGlassSolidIcon from './icons/MagnifyingGlassSolid';
 import SparkleSolidIcon from './icons/SparkleSolid';
 import TvSolidIcon from './icons/TvSolid';
-import { UserContext } from '../context/UserContext';
+import AvatarOMine from './AvatarOMine';
 
 const duration = 250;
 const fadeIn = { from: { opacity: 0 }, to: { opacity: .625 }};
@@ -33,7 +33,8 @@ const Header = () => {
   const { selectedHomeScreen, setSelectedHomeScreen } = useContext(UserContext);
   const [isDropdownCollapsing, setIsDropdownCollapsing] = useState<boolean>(false);
 
-  const openLeftDrawer = () => alert('A configurar menu lateral à esquerda');
+  const openLeftDrawer = () => alert('A configurar menu lateral à esquerda.');
+  const openRightDrawer = () => alert('A configurar menu lateral à direita.');
 
   const selectOption = (value: any) => {
     setSelectedHomeScreen(value);
@@ -67,7 +68,7 @@ const Header = () => {
         >
           <Row>
             <TouchableOpacity
-              style={{ marginRight: theme.spacing.m }}
+              style={{ paddingRight: theme.spacing.m }}
               onPress={openLeftDrawer}
             >
               <BarsSolidIcon width={24} height={24} fill={theme.colors.iconPrimaryBackground} />
@@ -80,7 +81,7 @@ const Header = () => {
                   padding: theme.spacing.s,
                 }
               ]}
-              onPress={() => setIsDropdownOpen(!isDropdownOpen)}
+              onPress={() => isDropdownOpen ? collapseDropdown() : setIsDropdownOpen(true)}
             >
               <Text variant="bold" marginRight="s">{selectedHomeScreen}</Text>
               <AngleDownSolidIcon width={12} height={12} fill={theme.colors.iconPrimaryBackground} transform={(isDropdownOpen && !isDropdownCollapsing) ? [{ rotate: '180deg' }] : undefined} />
@@ -92,23 +93,7 @@ const Header = () => {
               <MagnifyingGlassSolidIcon width={20} height={20} fill={theme.colors.iconPrimaryBackground} />
             </TouchableOpacity>
           
-            <TouchableOpacity style={[
-              styles.avatarContainer, {
-                backgroundColor: theme.colors.mainBackground,
-                marginLeft: theme.spacing.m,
-              }
-            ]}>
-              <Image style={styles.avatar} source={UserMdccg} />
-
-              <Box style={styles.onlineSignContainer}>
-                <Box style={[
-                  styles.onlineSign, {
-                    backgroundColor: theme.colors.onlinePrimaryBackground,
-                    borderColor: theme.colors.mainForeground,
-                  }
-                ]} />
-              </Box>
-            </TouchableOpacity>
+            <AvatarOMine onPress={openRightDrawer} />
           </Row>
         </Row>
 
@@ -152,8 +137,6 @@ const Header = () => {
   );
 }
 
-const avatarSize = 32;
-
 const styles = StyleSheet.create({
   header: {
     position: 'absolute',
@@ -180,35 +163,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 4,
-  },
-
-  avatarContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: avatarSize * 1.25,
-    height: avatarSize * 1.25,
-    borderRadius: avatarSize * 1.25,
-  },
-
-  avatar: {
-    width: avatarSize,
-    height: avatarSize,
-  },
-
-  onlineSignContainer: {
-    position: 'relative',
-  },
-  
-  onlineSign: {
-    width: avatarSize * .375,
-    height: avatarSize * .375,
-    borderRadius: avatarSize * .375,
-
-    borderWidth: 1,
-
-    position: 'absolute',
-    left: 8,
-    top: -4,
   },
 });
 

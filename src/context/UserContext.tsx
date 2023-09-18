@@ -8,7 +8,7 @@ type UserContextType = {
 }
 
 const initialValue: UserContextType = {
-  isDarkThemeActivated: false,
+  isDarkThemeActivated: true,
   setIsDarkThemeActivated: () => {},
   selectedHomeScreen: 'Início',
   setSelectedHomeScreen: () => {},
