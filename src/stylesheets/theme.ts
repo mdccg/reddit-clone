@@ -10,6 +10,7 @@ const theme = createTheme({
     iconPrimaryBackground: palette.blackPrimary,
     onlinePrimaryBackground: palette.greenPrimary,
     grayBackground: palette.grayLight,
+    transparent: 'rgba(0, 0, 0, 0)'
   },
 
   spacing: {

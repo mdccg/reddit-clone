@@ -126,66 +126,73 @@ const PostCard: React.FC<PostCardProps> = ({
   }, [currentVoteAnimation]);
 
   return (
-    <Box
-      borderBottomWidth={1}
-      borderColor="mainBackground"
-    >
-      <Row
-        justifyContent="space-between"
-        paddingTop="m"
-        paddingLeft="m"
-        paddingRight="m"
+    <>
+      <Box
+        elevation={2}
+        zIndex={2}
+        shadowColor="transparent"
+        backgroundColor="mainForeground"
       >
-        <Row>
-          <Image source={subredditPicture} style={[styles.subredditPicture, { marginRight: theme.spacing.s, }]} />
-          <Text variant="bold" paddingRight="s" fontSize={12}>r/{subredditName}</Text>
-          {(creationDate && relative) && <Text fontSize={10} color="grayBackground">{relative}</Text>}
-          {(isSponsored) && <Text fontSize={10} color="grayBackground">Patrocinado</Text>}
+        <Row
+          justifyContent="space-between"
+          paddingTop="m"
+          paddingLeft="m"
+          paddingRight="m"
+        >
+          <Row>
+            <Image source={subredditPicture} style={[styles.subredditPicture, { marginRight: theme.spacing.s, }]} />
+            <Text variant="bold" paddingRight="s" fontSize={12}>r/{subredditName}</Text>
+            {(creationDate && relative) && <Text fontSize={10} color="grayBackground">{relative}</Text>}
+            {(isSponsored) && <Text fontSize={10} color="grayBackground">Patrocinado</Text>}
+          </Row>
+
+          <TouchableOpacity style={styles.ellipsisVerticalSolidIconContainer}>
+            <EllipsisVerticalSolidIcon {...styles.ellipsisVerticalSolidIcon} fill={theme.colors.grayBackground} />
+          </TouchableOpacity>
         </Row>
 
-        <TouchableOpacity style={styles.ellipsisVerticalSolidIconContainer}>
-          <EllipsisVerticalSolidIcon {...styles.ellipsisVerticalSolidIcon} fill={theme.colors.grayBackground} />
-        </TouchableOpacity>
-      </Row>
-
-      <Text
-        marginTop="s"
-        marginLeft="m"
-        marginRight="m"
-        variant="bold"
-        fontSize={16}
-      >
-        {content}
-      </Text>
-
-      {image && (
-        <Box style={[styles.imageFrame, {
-          margin: theme.spacing.m,
-          marginTop: theme.spacing.s,
-          marginBottom: theme.spacing.s,
-        }]}>
-          <Image source={image} style={[styles.image, {
-            borderColor: theme.colors.mainBackground,
-          }]} resizeMode="contain" />
-        </Box>
-      )}
-      
-      {website && (
-        <TouchableOpacity style={{
-          padding: theme.spacing.m,
-          paddingTop: theme.spacing.s,
-        }}
-          onPress={openWebsite}
+        <Text
+          marginTop="s"
+          marginLeft="m"
+          marginRight="m"
+          variant="bold"
+          fontSize={16}
         >
-          <Text fontSize={10} color="grayBackground">{website}</Text>
-        </TouchableOpacity>
-      )}
+          {content}
+        </Text>
+
+        {image && (
+          <Box style={[styles.imageFrame, {
+            margin: theme.spacing.m,
+            marginTop: theme.spacing.s,
+            marginBottom: theme.spacing.s,
+          }]}>
+            <Image source={image} style={[styles.image, {
+              borderColor: theme.colors.mainBackground,
+            }]} resizeMode="contain" />
+          </Box>
+        )}
+        
+        {website && (
+          <TouchableOpacity style={{
+            padding: theme.spacing.m,
+            paddingTop: theme.spacing.s,
+          }}
+            onPress={openWebsite}
+          >
+            <Text fontSize={10} color="grayBackground">{website}</Text>
+          </TouchableOpacity>
+        )}
+
+      </Box>
 
       <Row
         paddingLeft="s"
         paddingRight="s"
         borderTopWidth={1}
+        borderBottomWidth={1}
         borderColor="mainBackground"
+        minHeight={36}
       >
         <Row width="30%" marginRight="s">
           <TouchableOpacity onPress={upvote} style={styles.iconContainer}>
@@ -198,7 +205,12 @@ const PostCard: React.FC<PostCardProps> = ({
               animation={currentVoteAnimation}
               duration={duration}
             >
-              <Box style={styles.countTextContainer}>
+              <Box
+                style={styles.countTextContainer}
+                elevation={1}
+                zIndex={1}
+                shadowColor="transparent"
+              >
                 <Text style={[styles.countText,
                   isUpvoted ? {
                     color: theme.colors.cardPrimaryBackground,
@@ -215,7 +227,12 @@ const PostCard: React.FC<PostCardProps> = ({
               duration={duration}
               style={[styles.lastValue, !lastVoteAnimation ? { opacity: 0 } : {}]}
             >
-              <Box style={styles.countTextContainer}>
+              <Box
+                style={styles.countTextContainer}
+                elevation={1}
+                zIndex={1}
+                shadowColor="transparent"
+              >
                 <Text style={[styles.countText,
                   isUpvoted ? {
                     color: theme.colors.cardPrimaryBackground,
@@ -257,7 +274,7 @@ const PostCard: React.FC<PostCardProps> = ({
 
         <Box />
       </Row>
-    </Box>
+    </>
   );
 }
 

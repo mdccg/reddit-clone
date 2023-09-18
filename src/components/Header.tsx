@@ -33,7 +33,8 @@ const Header = () => {
   const { selectedHomeScreen, setSelectedHomeScreen, isDarkThemeActivated, setIsDarkThemeActivated } = useContext(UserContext);
   const [isDropdownCollapsing, setIsDropdownCollapsing] = useState<boolean>(false);
 
-  const openLeftDrawer = () => alert('A configurar menu lateral à esquerda.');
+  const openLeftDrawer = () => {}
+  
   const openRightDrawer = () => {
     setIsDarkThemeActivated(!isDarkThemeActivated);
   }
@@ -64,8 +65,9 @@ const Header = () => {
           borderBottomWidth={1}
           padding="s"
           paddingLeft="m"
-          elevation={3}
-          zIndex={3}
+          elevation={5}
+          zIndex={5}
+          shadowColor="transparent"
           height={56}
         >
           <Row>
@@ -147,8 +149,9 @@ const styles = StyleSheet.create({
 
   dropdown: {
     borderBottomWidth: 1,
-    elevation: 2,
-    zIndex: 2,
+    elevation: 4,
+    zIndex: 4,
+    shadowColor: 'trasparent',
   },
 
   wrapper: {
@@ -157,8 +160,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     height: Dimensions.get('screen').height,
-    elevation: 1,
-    zIndex: 1,
+    elevation: 3,
+    zIndex: 3,
+    shadowColor: 'trasparent',
   },
 
   selectContainer: {

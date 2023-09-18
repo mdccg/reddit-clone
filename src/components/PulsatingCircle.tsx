@@ -12,7 +12,12 @@ interface PulsatingCircleProps {
 
 const PulsatingCircle: React.FC<PulsatingCircleProps> = ({ children, duration, color, size }) => (
   <>
-    <Box position="absolute" elevation={1} zIndex={2}>
+    <Box
+      position="absolute"
+      elevation={2}
+      zIndex={2}
+      shadowColor="transparent"
+    >
       {children}
     </Box>
 
