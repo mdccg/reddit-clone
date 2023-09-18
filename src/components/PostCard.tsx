@@ -164,7 +164,9 @@ const PostCard: React.FC<PostCardProps> = ({
           marginTop: theme.spacing.s,
           marginBottom: theme.spacing.s,
         }]}>
-          <Image source={image} style={styles.image} resizeMode="contain" />
+          <Image source={image} style={[styles.image, {
+            borderColor: theme.colors.mainBackground,
+          }]} resizeMode="contain" />
         </Box>
       )}
       
@@ -290,6 +292,7 @@ const styles = StyleSheet.create({
     maxWidth: '100%',
     height: 256,
     borderRadius: 20,
+    borderWidth: 1,
   },
 
   button: {
