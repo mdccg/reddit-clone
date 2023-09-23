@@ -192,6 +192,7 @@ const PostCard: React.FC<PostCardProps> = ({
         borderTopWidth={1}
         borderBottomWidth={1}
         borderColor="mainBackground"
+        backgroundColor="mainForeground"
         minHeight={36}
       >
         <Row width="30%" marginRight="s">
@@ -279,9 +280,7 @@ const PostCard: React.FC<PostCardProps> = ({
 }
 
 const styles = StyleSheet.create({
-  lastValue: {
-    position: 'absolute',
-  },
+  lastValue: { position: 'absolute' },
 
   subredditPicture: {
     width:  24,
@@ -296,14 +295,9 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
 
-  ellipsisVerticalSolidIcon: {
-    width:  16,
-    height: 16,
-  },
+  ellipsisVerticalSolidIcon: { width:  16, height: 16 },
 
-  imageFrame: {
-    maxWidth: '100%',
-  },
+  imageFrame: { maxWidth: '100%' },
   
   image: {
     maxWidth: '100%',
@@ -325,24 +319,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  voteIcon: {
-    width:  22,
-    height: 22,
-  },
-
-  icon: {
-    width:  16,
-    height: 16,
-  },
+  voteIcon: { width:  22, height: 22 },
+  icon: { width:  16, height: 16 },
 
   countTextContainer: {
     alignItems: 'center',
     minWidth: 24,
   },
 
-  countText: {
-    fontSize: 12,
-  },
+  countText: { fontSize: 12 },
 });
 
 export default PostCard;

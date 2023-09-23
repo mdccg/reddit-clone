@@ -6,6 +6,7 @@ import PostCard from '../components/PostCard';
 import { postsMock } from '../mock';
 import { Theme } from '../stylesheets/theme';
 import PostType from '../types/PostType';
+import Box from '../components/Box';
 
 const Feed = () => {
   const theme = useTheme<Theme>();
@@ -18,7 +19,12 @@ const Feed = () => {
       
       <ScrollView 
         style={{ backgroundColor: theme.colors.mainForeground }}
-        contentContainerStyle={{ paddingBottom: theme.spacing.m }}
+        contentContainerStyle={{
+          elevation: 2,
+          zIndex: 2,
+          shadowColor: 'transparent',
+          backgroundColor: theme.colors.mainForeground,
+        }}
       >
         {posts.map((post, index) => (
           <PostCard
@@ -26,6 +32,13 @@ const Feed = () => {
             post={post}
             isUserSubscribed={subscribedSubreddits.includes(post.subredditName)} />
         ))}
+
+        <Box
+          elevation={2}
+          zIndex={2}
+          shadowColor="transparent"
+          backgroundColor="mainForeground"
+          height={theme.spacing.m} />
       </ScrollView>
     </>
   );

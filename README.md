@@ -21,8 +21,17 @@
 - [X] Adicionar animação nos números
 - [ ] Adicionar as outras pilhas de navegação
 - [ ] Corrigir o bug das animações assíncronas na tela de carregamento
+- [ ] Criar uma função para mudar aleatoriamente o número de votos de cada post
 
 ## Motivação
+
+Este app é um reflexo do meu esforço em explorar e testar a biblioteca de interface de usuário [restyle](https://github.com/Shopify/restyle) em um ambiente prático. Durante o processo, busquei compreender profundamente suas nuances e capacidades. Inicialmente, o restyle se revelou uma ferramenta simplificada e intuitiva para o design de interfaces, tornando a estilização de componentes uma tarefa ágil.
+
+No entanto, à medida que o projeto avançava e a complexidade das interfaces crescia, encontrei desafios significativos. Em particular, quando lidava com componentes que demandavam uma extensa personalização com várias propriedades CSS, deparei-me com a necessidade de recorrer a `StyleSheet`, uma abordagem à moda antiga, para alcançar os resultados desejados. Esse ponto de inflexão me levou a questionar a eficácia do restyle em lidar com situações mais complexas de estilização.
+
+Embora o restyle tenha a vantagem de centralizar detalhes importantes, como paleta de cores, espaçamentos e fontes tipográficas, em uma única constante para todos os componentes integrados ao framework, essa unificação não se mostrou suficiente para superar suas limitações em comparação com outras bibliotecas estabelecidas.
+
+Em retrospectiva, percebi que muitas das funcionalidades que o restyle oferece já são habilmente executadas pelo [styled-components](https://styled-components.com/), tornando-o uma escolha mais robusta e versátil para a estilização de componentes. Portanto, embora tenha sido uma experiência educativa explorar o restyle, não fiquei totalmente satisfeito com sua adequação para projetos mais complexos e desafiadores.
 
 Este foi o terceiro repositório de código apresentado no [Curso Superior de TSI](https://www.ifms.edu.br/campi/campus-aquidauana/cursos/graduacao/sistemas-para-internet/sistemas-para-internet) do IFMS como requisito para obtenção da nota parcial das atividades da unidade curricular Programação para Dispositivos Móveis II.
 
@@ -42,7 +51,8 @@ Os créditos pelas mídias disponibilizadas estão disponíveis [aqui](./assets/
 
 ## Galeria
 
-<!-- Fotos aqui. -->
+![Tela inicial do Reddit com tela claro aplicado](./docs/light-theme.jpg)
+![Tela inicial do Reddit com tela escuro aplicado](./docs/dark-theme.jpg)
 
 ## Como rodar
 
