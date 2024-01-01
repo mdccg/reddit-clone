@@ -35,7 +35,7 @@ Em retrospectiva, percebi que muitas das funcionalidades que o restyle oferece j
 
 Este foi o terceiro repositório de código apresentado no [Curso Superior de TSI](https://www.ifms.edu.br/campi/campus-aquidauana/cursos/graduacao/sistemas-para-internet/sistemas-para-internet) do IFMS como requisito para obtenção da nota parcial das atividades da unidade curricular Programação para Dispositivos Móveis II.
 
-| [&larr; Repositório anterior](https://github.com/mdccg/muzy-simple-calc) | [Próximo repositório &rarr;](#) |
+| [&larr; Repositório anterior](https://github.com/mdccg/muzy-simple-calc) | [Próximo repositório &rarr;](https://github.com/mdccg/aquidapet-showcase) |
 |-|-|
 
 ## Pilha de tecnologia
